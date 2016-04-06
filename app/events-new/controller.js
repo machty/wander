@@ -25,14 +25,8 @@ export default Controller.extend({
   categories: categories,
 
   save: task(function * () {
-    const promise = this.store.createRecord('event', get(this, 'model'))
-                              .save();
-
-    yield promise;
-
-    promise.then(()=> {
-      this.transitionToRoute('events');
-    });
+    yield this.store.createRecord('event', get(this, 'model')).save();
+    this.transitionToRoute('events');
   }).drop(),
 
   getLatAndLngWithFile(file) {
